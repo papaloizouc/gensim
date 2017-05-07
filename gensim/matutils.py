@@ -156,6 +156,12 @@ def zeros_aligned(shape, dtype, order='C', align=128):
 def ismatrix(m):
     return isinstance(m, np.ndarray) and m.ndim == 2 or scipy.sparse.issparse(m)
 
+def is_sparse_matrix(m):
+    for i in (scipy.sparse.csr_matrix, scipy.sparse.csc_matrix):
+        if isinstance(m, i):
+            return True
+
+    return False
 
 def any2sparse(vec, eps=1e-9):
     """Convert a np/scipy vector into gensim document format (=list of 2-tuples)."""
